@@ -1,0 +1,13 @@
+.profile__name {
+    display: flex;
+    gap: 18px;
+    
+}
+
+@media screen and (max-width: 1110px) {
+    .profile__name {
+        flex-direction: row;
+        margin-left: calc(19px + 10px);
+        gap: 10px;
+    }
+}

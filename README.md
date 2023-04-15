@@ -1,17 +1,25 @@
-# Проект: Место
+# __𝙼𝚎𝚜𝚝𝚘__
 
-### Обзор
+## :file_folder: Что из себя представляет *проект 𝚖𝚎𝚜𝚝𝚘*?
 
-* Figma
-* Картинки
+__𝙼𝚎𝚜𝚝𝚘__ __-__ это интерактивная страница, созданная для работы с фотографиями.
+  
+[![Ввод SVG](https://readme-typing-svg.demolab.com/?lines=Какова+функциональность+проекта+?)](https://git.io/typing-svg)
+### :bulb: Проект *mesto* позволяет:
+- добавлять фотографии
+- удалять фотографии
+- редактировать свой профиль
+- ставить лайки
+___
+:computer: ___Технологии:___
 
-**Figma**
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+___
+## [Ссылка на проект 👉🏻](https://sofiafrikina.github.io/russian-travel/index.html)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+## [Макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)

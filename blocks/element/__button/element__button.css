@@ -1,0 +1,18 @@
+.element__button {
+    background-image: url(../../../images/element__button.svg);
+    width: 22px;
+    height: 19px;
+    border: none;
+    align-self: center;
+    margin-right: 20px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.element__button:active {
+    background-image: url(../../../images/black-like.svg);
+    
+}
+.element__button:not(.element__buton:active):hover {
+    opacity: 0.5;
+}
