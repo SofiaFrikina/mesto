@@ -9,10 +9,11 @@
     cursor: pointer;
     flex-shrink: 0;
 }
+
 .element__button:active {
     background-image: url(../../../images/black-like.svg);
-    
 }
+
 .element__button:not(.element__buton:active):hover {
     opacity: 0.5;
 }

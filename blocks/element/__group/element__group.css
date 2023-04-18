@@ -1,7 +1,7 @@
 .element__group {
-    
     display: flex;
     justify-content: space-between;
-    min-height: 79px;
-    
+    line-height: 79px;
+    padding-top: 25px;
+    padding-bottom: 26px;
 }

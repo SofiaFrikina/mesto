@@ -15,45 +15,23 @@
         
         max-width: fit-content;
         justify-items: center;
-        
-        
     }
-    
 }
-
 
 @media screen and (max-width: 920px) {
     .elements {
-        
         grid-template-columns: repeat(2, 1fr);
-        
-        
-        
-        
     }
-    
 }
 
 @media screen and (max-width: 590px) {
     .elements {
-        
         grid-template-columns: repeat(1, 1fr);
-        
-        
-        
-        
     }
-    
 }
-
-
 
 @media screen and (max-width: 320px) {
     .elements {
-        
-        
         max-width: calc(100% - 38px);
-        
     }
-    
 }
