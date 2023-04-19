@@ -8,6 +8,7 @@
     background-color: #FFFFFF;
     cursor: pointer;
     flex-shrink: 0;
+    padding: 0;
 }
 
 .element__button:active {

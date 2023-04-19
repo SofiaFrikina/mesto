@@ -11,12 +11,12 @@
 @media screen and (max-width: 1110px) {
     .profile__info {
         justify-content: center;
-        row-gap: 14px;
+        row-gap: 8px;
         column-gap: 10px;
         min-width: 282px;
         align-self: center;
         margin: 0;
-        margin-bottom: 36px;
+        margin-bottom: 34px;
         margin-top: 26px;
     }
 }
