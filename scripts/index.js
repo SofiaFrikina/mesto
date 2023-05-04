@@ -1,13 +1,13 @@
-let popUp = document.querySelector('.popup');
-let popUpTwo = document.querySelector('.popup_type_new-element');
+const popUp = document.querySelector('.popup');
+const popUpTwo = document.querySelector('.popup_type_new-element');
 //const popUpTwoButton = popUpTwo.querySelector('.popup__button');
 
 //const popUpContainer = popUp.querySelector('.popup__container');
 const profile = document.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
-let popUpClose = popUp.querySelector('.popup__close');
+const popUpClose = popUp.querySelector('.popup__close');
 //const popUpTwoClose = popUpTwo.querySelector('.popup__close');
-let popUpButton = popUp.querySelector('.popup__button');
+const popUpButton = popUp.querySelector('.popup__button');
 
 const addButton = profile.querySelector('.profile__add-button');
 
@@ -153,11 +153,6 @@ const rendercard = (element) => {
 
 
 function getForm() {
-
-    /*textInput.textcontent = element.name;
-    sourseInput.src = element.link;
-    console.log(textInput);
-    console.log(sourseInput);*/
     return {
         name: textInput.value,
         link: sourseInput.value
@@ -167,7 +162,7 @@ function getForm() {
 elements.forEach(createElements);
 
 function newHandleFormSubmit(evt) {
-    evt.preventDefault;
+    evt.preventDefault();
     const dataElement = getForm();
     rendercard(dataElement);
     closePopUp(popUpTwo);
