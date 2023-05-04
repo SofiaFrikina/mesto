@@ -29,7 +29,7 @@
         </section>
         <template class="elements-template">
             <div class="element">
-                <img class="element__image">
+                <img class="element__image" alt="#">
                 <div class="element__group">
                     <h2 class="element__text">
 
@@ -48,7 +48,7 @@
     <div class="popup">
         <div class="popup__container">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form action="#" name="profile-form" class="popup__form">
+            <form action="#" name="profile-form" class="popup__form popup__form_type_one">
                 <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="popup-name">
                 <input type="text" placeholder="Профессия" class="popup__input popup__input_type_job" name="popup-job">
                 <button type="submit" class="popup__button">Сохранить</button>
@@ -57,25 +57,24 @@
         </div>
     </div>
 
-    <div class="popup-two">
-        <div class="popup-two__container">
-            <h2 class="popup-two__title">Редактировать профиль</h2>
-            <form action="#" name="profile-form" class="popup-two__form">
-                <input type="text" placeholder="Название" class="popup-two__input popup-two__input_type_text"
-                    name="popup-text">
-                <input type="text" placeholder="Ссылка на картинку"
-                    class="popup-two__input popup-two__input_type_sourse" name="popup-sourse">
-                <button type="submit" class="popup-two__button">Создать</button>
+    <div class="popup popup_type_new-element">
+        <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form action="#" name="element-form" class="popup__form popup__form_type_two">
+                <input type="text" placeholder="Название" class="popup__input popup__input_type_text" name="popup-text">
+                <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_sourse"
+                    name="popup-sourse">
+                <button type="submit" class="popup__button">Создать</button>
             </form>
-            <button type="button" class="popup-two__close" aria-label="Закрыть"></button>
+            <button type="button" class="popup__close" aria-label="Закрыть"></button>
         </div>
     </div>
 
-    <div class="popup-img">
-        <div class="popup-img__container">
-            <img class="popup-img__image" src="#" alt="#">
-            <p class="popup-img__text"></p>
-            <button type="button" class="popup-img__button" aria-label="Закрыть"></button>
+    <div class="popup popup_type_image">
+        <div class="popup__element">
+            <img class="popup__image" alt="#">
+            <p class="popup__text"></p>
+            <button type="button" class="popup__close" aria-label="Закрыть"></button>
 
         </div>
 

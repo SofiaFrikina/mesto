@@ -1,16 +1,20 @@
 .profile__info {
     display: flex;
+    flex-direction: column;
     margin-top: 22px;
     flex-wrap: wrap;
     align-content: flex-start;
-    margin-right: 244px;
+    
+    
     max-width: 336px;
+    min-width: 336px;
     flex-shrink: 0;
 }
 
 @media screen and (max-width: 1110px) {
     .profile__info {
         justify-content: center;
+        justify-self: center;
         row-gap: 8px;
         column-gap: 10px;
         min-width: 282px;
