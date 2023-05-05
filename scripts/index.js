@@ -54,7 +54,6 @@ function handleFormSubmit(evt) {
 };
 
 popUpButton.addEventListener('click', handleFormSubmit);
-//popUpClose.addEventListener('click', closePopUp);
 popUpForm.addEventListener('submit', handleFormSubmit);
 
 const elementsList = document.querySelector('.elements');
@@ -93,18 +92,10 @@ const elements = [
 
 
 
-
-
-
-
-
-
-
-//popUpButton.addEventListener('click', card);
-
-
-let elementImage = document.querySelector('.element__image');
-let elementText = document.querySelector('.element__text');
+const elementImage = document.querySelector('.element__image');
+const elementText = document.querySelector('.element__text');
+const popUpText = popUpImg.querySelector('.popup__text');
+const popUpImage = popUpImg.querySelector('.popup__image');
 
 addButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -117,6 +108,8 @@ const createElements = function (element) {
     const elementImage = elementsElement.querySelector('.element__image');
     elementsElement.querySelector('.element__text').textContent = element.name;
     elementImage.src = element.link;
+    elementImage.alt = element.name;
+
 
     //удалять карточки
     elementsElement.querySelector('.element__button-close').addEventListener('click', () => {
@@ -133,24 +126,28 @@ const createElements = function (element) {
         evt.preventDefault();
         //const name = textInput.value;
         //const link = sourseInput.value; s
-        popUpImg.querySelector('.popup__text').textContent = element.name;
-        popUpImg.querySelector('.popup__image').src = element.link;
-        popUpImg.querySelector('.popup__image').alt = element.name;
+        popUpText.textContent = element.name;
+        popUpImage.src = element.link;
+        popUpImage.alt = element.name;
         openPopUp(popUpImg);
 
     });
 
-    elementsList.append(elementsElement);
     return elementsElement;
 
 
 }
 
-const rendercard = (element) => {
-    elementsList.prepend(createElements(element));
+
+const rendercard = (element, position) => {
+    switch (position) {
+        case 'prepend': elementsList.prepend(createElements(element)); break;
+        case 'append': elementsList.append(createElements(element)); break;
+        default: elementsList.prepend(createElements(element));
+    }
+
+
 }
-
-
 
 function getForm() {
     return {
@@ -159,12 +156,13 @@ function getForm() {
     }
 }
 
-elements.forEach(createElements);
+elements.forEach((element) => rendercard(element, 'append'));
+
 
 function newHandleFormSubmit(evt) {
     evt.preventDefault();
     const dataElement = getForm();
-    rendercard(dataElement);
+    rendercard(dataElement, 'prepend');
     closePopUp(popUpTwo);
 }
 
