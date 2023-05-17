@@ -1,0 +1,7 @@
+.popup__text-error_active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    margin-bottom: 13px;
+}
+
