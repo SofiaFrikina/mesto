@@ -1,5 +1,6 @@
 const popUpProfile = document.querySelector('.popup');
 const popUpNewCards = document.querySelector('.popup_type_new-element');
+const buttonPopUpNewCards = popUpNewCards.querySelector('.popup__button');
 //const popUpTwoButton = popUpTwo.querySelector('.popup__button');
 
 //const popUpContainer = popUp.querySelector('.popup__container');
@@ -7,7 +8,7 @@ const profile = document.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
 const buttonClosePopUpProfile = popUpProfile.querySelector('.popup__close');
 //const popUpTwoClose = popUpTwo.querySelector('.popup__close');
-const buttonPopUpProfile = popUpProfile.querySelector('.popup__button');
+//const buttonPopUpProfile = popUpProfile.querySelector('.popup__button');
 
 const addButton = profile.querySelector('.profile__add-button');
 
@@ -54,7 +55,14 @@ function closePopUpsOverlay(evt) {
     }
 }
 
+formPopUpCards.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    rendercard(inputTextPopUpCards.value, inputSoursePopUpCards.value);
+    formPopUpCards.reset();
+    inActiveButton(buttonPopUpNewCards, validation)
+    closePopUp(popUpNewCards);
 
+});
 
 document.querySelectorAll('.popup__close').forEach(button => {
     const buttonsPopUp = button.closest('.popup');
@@ -78,7 +86,7 @@ function profileFormSubmit(evt) {
     closePopUp(popUpProfile);
 };
 
-buttonPopUpProfile.addEventListener('click', profileFormSubmit);
+//buttonPopUpProfile.addEventListener('click', profileFormSubmit);
 formPopUpProfile.addEventListener('submit', profileFormSubmit);
 
 
