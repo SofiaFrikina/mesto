@@ -55,14 +55,7 @@ function closePopUpsOverlay(evt) {
     }
 }
 
-formPopUpCards.addEventListener('submit', function (evt) {
-    evt.preventDefault();
-    rendercard(inputTextPopUpCards.value, inputSoursePopUpCards.value);
-    formPopUpCards.reset();
-    inActiveButton(buttonPopUpNewCards, validation)
-    closePopUp(popUpNewCards);
 
-});
 
 document.querySelectorAll('.popup__close').forEach(button => {
     const buttonsPopUp = button.closest('.popup');
@@ -278,5 +271,15 @@ function newHandleFormSubmit(evt) {
     closePopUp(popUpNewCards);
 }
 
-//popUpTwoButton.addEventListener('click', newHandleFormSubmit);
-formPopUpCards.addEventListener('submit', newHandleFormSubmit);
+formPopUpCards.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    const dataElement = getForm();
+    rendercard(dataElement, 'prepend');
+    formPopUpCards.reset();
+    inActiveButton(buttonPopUpNewCards, selectors);
+    closePopUp(popUpNewCards);
+
+});
+
+//buttonPopUpNewCards.addEventListener('click', newHandleFormSubmit);
+//formPopUpCards.addEventListener('submit', newHandleFormSubmit);
