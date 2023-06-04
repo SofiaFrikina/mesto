@@ -1,5 +1,5 @@
-import { Card } from './Card'
-import { FormValidator, validations, formPopUpCards, formvalidatoring } from './validate'
+import { Card } from './Card.js'
+import { formPopUpCards, formvalidatoring } from './validate.js'
 const popUpProfile = document.querySelector('.popup');
 const popUpNewCards = document.querySelector('.popup_type_new-element');
 const buttonPopUpNewCards = popUpNewCards.querySelector('.popup__button');
