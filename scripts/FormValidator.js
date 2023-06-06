@@ -40,11 +40,11 @@ export class FormValidator {
             return !inputElement.validity.valid;
         });
     }
-    inActiveButton() {
+    disableButton() {
         this._buttonElement.classList.add(this._inactiveButtonClass);
         this._buttonElement.setAttribute('disabled', true);
     }
-    _activeButton() {
+    _enableButton() {
         this._buttonElement.classList.remove(this._inactiveButtonClass);
         this._buttonElement.removeAttribute('disabled', true);
     }
@@ -52,10 +52,10 @@ export class FormValidator {
     _toggleButton() {
         if (this._hasInvalidInput()) {
             //кнопка неактивная
-            this.inActiveButton();
+            this.disableButton();
         } else {
             //кнопка активная
-            this._activeButton();
+            this._enableButton();
         }
     };
     //создаем функцию, которая позволит слушателю событий добавиться всем полям инпут внутри формы

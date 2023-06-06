@@ -1,8 +1,10 @@
 export class Card {
-    constructor(name, link, popupImage) {
+    constructor(name, link, handleClickByImage, likeCard, removeCard) {
         this._name = name;
         this._link = link;
-        this._popupImage = popupImage;
+        this._handleClickByImage = handleClickByImage;
+        this._likeCard = likeCard;
+        this._removeCard = removeCard;
 
     }
     //получает шаблон создаваемой карточки
@@ -15,32 +17,35 @@ export class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._element.querySelector('.element__text').textContent = this._name;
-        this._element.querySelector('.element__image').src = this._link;
-        this._element.querySelector('.element__image').alt = this._name;
-        this._like();
-        this._deleteCard();
-        this._setEventListenPopupImage();
+        this._cardImage = this._element.querySelector('.element__image')
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        this._setEventListeners();
         return this._element;
     }
-    //лайк
-    _like() {
+
+    addLike() {
+        this._likeButton.classList.toggle('element_clicked');
+    }
+
+    clickRemoveCard() {
+        this._element.remove();
+        this._element = null;
+    }
+
+    _setEventListeners() {
         this._likeButton = this._element.querySelector('.element__button');
         this._likeButton.addEventListener('click', () => {
-            this._likeButton.classList.toggle('element_clicked');
+            this._likeCard(this);
         });
-    }
-    //удалить карточку
-    _deleteCard() {
+
         this._deleteCardButton = this._element.querySelector('.element__button-close');
         this._deleteCardButton.addEventListener('click', () => {
-            this._element.remove()
+            this._removeCard(this);
         });
-    }
-    //открытие поп апа изображения по клику на карточку
-    _setEventListenPopupImage() {
-        this._element.querySelector('.element__image').addEventListener('click', () => {
-            console.log(this._name, this._link);
-            popupImage(this._name, this._link);
+
+        this._cardImage.addEventListener('click', () => {
+            this._handleClickByImage(this._name, this._link);
         });
     }
 
