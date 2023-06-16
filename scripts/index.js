@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { Section } from './Section.js';
 
 const popUpProfile = document.querySelector('.popup');
 const popUpNewCards = document.querySelector('.popup_type_new-element');
@@ -56,6 +57,7 @@ editButton.addEventListener('click', function (e) {
     e.preventDefault();
     inputNamePopUpProfile.value = profileTitle.textContent;
     inputJobPopUpProfile.value = profileSubTitle.textContent;
+    formvalidatoringProfile.disableButton();
     openPopUp(popUpProfile);
 });
 
@@ -124,15 +126,14 @@ function removeCard(card) {
     card.clickRemoveCard();
 }
 
-const renderCard = (item, position) => {
-    switch (position) {
-        case 'prepend': cardsContainer.prepend(createCard(item)); break;
-        case 'append': cardsContainer.append(createCard(item)); break;
-        default: cardsContainer.prepend(createCard(item));
+const cards = new Section({
+    items: elements,
+    renderer: (item) => {
+        cards.addItem(createCard(item), 'append');
     }
-}
+}, '.elements');
 
-elements.forEach((item) => renderCard(item, 'append'));
+cards.renderItems();
 
 function getForm() {
     return {
@@ -141,19 +142,20 @@ function getForm() {
     }
 }
 
-function newHandleFormSubmit(evt) {
+function newHandleFormSubmit() {
     evt.preventDefault();
     const dataElement = getForm();
-    renderCard(dataElement, 'prepend');
+    cards.addItem(dataElement, 'prepend');
     closePopUp(popUpNewCards);
 }
-
 formPopUpCards.addEventListener('submit', function (evt) {
     evt.preventDefault();
     const dataElement = getForm();
-    renderCard(dataElement, 'prepend');
+    cards.addItem(dataElement, 'prepend');
+    //cards.addItem(createCard(item), 'prepend');
+
+
     formPopUpCards.reset();
-    formvalidatoringProfile.disableButton();
     formvalidatoringCard.disableButton();
     closePopUp(popUpNewCards);
 });
