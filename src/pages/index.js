@@ -8,25 +8,31 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 
 const userInfo = new UserInfo({
-    nameSelector: profileTitle,
-    jobSelector: profileSubTitle
+    nameSelector: '.profile__title',
+    jobSelector: '.profile__subtitle'
 });
 
 //попап редактирования профиля
-const popupUser = new PopupWithForm(popUpProfile, profileFormSubmit);
+const popupUser = new PopupWithForm('.popup', {
+    handleFormSubmit: (data) => {
+        userInfo.setUserInfo(data.name, data.job);
+        popupUser.close();
+    }
+});
 
 editButton.addEventListener('click', function (e) {
     e.preventDefault();
-    inputNamePopUpProfile.value = userInfo.getUserInfo().inputName;
-    inputJobPopUpProfile.value = userInfo.getUserInfo().inputJob;
+    const data = userInfo.getUserInfo();
+    inputNamePopUpProfile.value = data.name;
+    inputJobPopUpProfile.value = data.job;
     formvalidatoringProfile.disableButton();
     popupUser.open();
 });
 
-function profileFormSubmit() {
-    userInfo.setUserInfo(inputNamePopUpProfile.value, inputJobPopUpProfile.value);
+/*function profileFormSubmit(data) {
+    userInfo.setUserInfo(data.name, data.job);
     popupUser.close();
-};
+};*/
 
 popupUser.setEventListeners();
 
@@ -34,8 +40,8 @@ popupUser.setEventListeners();
 
 
 
-const popupCard = new PopupWithForm(popUpNewCards, newHandleFormSubmit);
-const popupImage = new PopupWithImage(popUpAddImage);
+
+const popupImage = new PopupWithImage('.popup_type_image');
 
 function handleClickByImage(name, link) {
     popupImage.open(name, link);
@@ -64,25 +70,29 @@ const cards = new Section({
 
 cards.renderItems();
 
-function getForm() {
-    return {
-        name: inputTextPopUpCards.value,
-        link: inputSoursePopUpCards.value
+const popupCard = new PopupWithForm('.popup_type_new-element', {
+    handleFormSubmit: (data) => {
+        cards.addItem(createCard(data), 'prepend');
+        //formPopUpCards.reset();
+        //formvalidatoringCard.disableButton();
+        popupCard.close();
     }
-}
+});
 
-function newHandleFormSubmit() {
-    const dataElement = getForm();
-    cards.addItem(createCard(dataElement), 'prepend');
+
+/*function newHandleFormSubmit(item) {
+    //const dataElement = getForm();
+    cards.addItem(createCard(item.name, item.link), 'prepend');
     formPopUpCards.reset();
     formvalidatoringCard.disableButton();
     popupCard.close();
-}
+}*/
 
 popupCard.setEventListeners();
 
 addButton.addEventListener('click', function (e) {
-    e.preventDefault();
+
+    formvalidatoringCard.disableButton();
     popupCard.open();
 });
 

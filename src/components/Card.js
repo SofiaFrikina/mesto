@@ -16,6 +16,7 @@ export class Card {
     //вставит данные в разметку и подготовит карточку к публикации
     generateCard() {
         this._element = this._getTemplate();
+        this._likeButton = this._element.querySelector('.element__button');
         this._element.querySelector('.element__text').textContent = this._name;
         this._cardImage = this._element.querySelector('.element__image')
         this._cardImage.src = this._link;
@@ -34,7 +35,7 @@ export class Card {
     }
 
     _setEventListeners() {
-        this._likeButton = this._element.querySelector('.element__button');
+
         this._likeButton.addEventListener('click', () => {
             this._likeCard(this);
         });

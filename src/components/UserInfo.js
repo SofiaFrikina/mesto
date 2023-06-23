@@ -1,19 +1,19 @@
 export class UserInfo {
     constructor({ nameSelector, jobSelector }) {
-        this._nameSelector = nameSelector;
-        this._jobSelector = jobSelector;
+        this._profileName = document.querySelector(nameSelector);
+        this._profileJob = document.querySelector(jobSelector);
     }
     // возвращает объект с данными пользователя
     getUserInfo() {
-        const userObject = {
-            inputName: this._nameSelector.textContent,
-            inputJob: this._jobSelector.textContent
+        return {
+            name: this._profileName.textContent,
+            job: this._profileJob.textContent
         }
-        return userObject;
+
     }
     //принимает новые данные пользователя и добавляет их на страницу
     setUserInfo(name, job) {
-        this._nameSelector.textContent = name;
-        this._jobSelector.textContent = job;
+        this._profileName.textContent = name;
+        this._profileJob.textContent = job;
     }
 }
