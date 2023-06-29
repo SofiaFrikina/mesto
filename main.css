@@ -38,4 +38,5 @@
 .popup__button_disabled{background-color:transparent;border:1px solid #000;color:#000;cursor:not-allowed}
 .popup__label{align-self:center;display:flex;flex-direction:column;position:relative}
 .popup__input_disabled{border-bottom:1px solid red}
+.element__count{color:#000;font-size:13px;font-weight:400;line-height:15.73px;margin:3px 0 0;text-align:center}
 
