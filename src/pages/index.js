@@ -17,10 +17,25 @@ const api = new Api({
     }
 })
 
+Promise.all([api.getUserInfo(), api.getCards()])
+    .then(([data, initialCards]) => {
+        //useid = data._id;
+        userInfo.setUserAvatar(data.avatar)
+        userInfo.setUserInfo(data.name, data.about);
+        //cards.renderItems(initialCards, useid);
+        cards.renderItems(initialCards.reverse())
+    })
+    .catch((err) => console.log(err))
+
 const popupAvatar = new PopupWithForm('.popup_type_avatar', {
-    handleFormSubmit: (data) => {
-        userInfo.setUserAvatar(data.link);
-        popupAvatar.close();
+    handleFormSubmit: (cardData) => {
+        api.editAvatar(cardData.url)
+            .then((data) => {
+                userInfo.setUserAvatar(data.link);
+                popupAvatar.close();
+            })
+            .catch((err) => console.log(err))
+
     }
 })
 
@@ -39,9 +54,14 @@ const userInfo = new UserInfo({
 
 //попап редактирования профиля
 const popupUser = new PopupWithForm('.popup', {
-    handleFormSubmit: (data) => {
-        userInfo.setUserInfo(data.name, data.job);
-        popupUser.close();
+    handleFormSubmit: (cardData) => {
+        api.editUserInfo(cardData.name, cardData.job)
+            .then((data) => {
+                userInfo.setUserInfo(data.name, data.job);
+                popupUser.close();
+            })
+            .catch((err) => console.log(err))
+
     }
 });
 
@@ -95,12 +115,6 @@ const popupConfirm = new PopupWIthConfirmation('.popup_type_confirm', handleForm
 
 popupConfirm.setEventListeners();
 
-/*function handleSubmitDelete(card) {
-    card.clickRemoveCard();
-    popupConfirm.close();
-
-}*/
-
 function handleFormSubmit(card) {
     api.deleteCard(card._id)
         .then(() => {
@@ -130,11 +144,16 @@ const cards = new Section({
 cards.renderItems();
 
 const popupCard = new PopupWithForm('.popup_type_new-element', {
-    handleFormSubmit: (data) => {
-        cards.addItem(createCard(data), 'prepend');
-        //formPopUpCards.reset();
-        //formvalidatoringCard.disableButton();
-        popupCard.close();
+    handleFormSubmit: (cardData) => {
+        api.addCards(cardData.name, cardData.link)
+            .then((data) => {
+                cards.addItem(createCard(data), 'prepend');
+                //formPopUpCards.reset();
+                //formvalidatoringCard.disableButton();
+                popupCard.close();
+            })
+            .catch((err) => console.log(err));
+
     }
 });
 

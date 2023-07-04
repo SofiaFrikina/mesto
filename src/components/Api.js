@@ -40,7 +40,7 @@ export class Api {
     };
     addCards(name, link) {
         return fetch(`${this._url}/cards`, {
-            method: "PATCH",
+            method: "POST",
             headers: this._headers,
             body: JSON.stringify({
                 name: `${name}`,
@@ -78,7 +78,7 @@ export class Api {
     };
     editAvatar(url) {
         return fetch(`${this._url}/users/me/avatar`, {
-            method: "PUT",
+            method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
                 avatar: `${url}`
