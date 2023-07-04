@@ -16,6 +16,10 @@ export const formPopUpCards = document.querySelector('.popup__form_type_two');
 export const inputTextPopUpCards = formPopUpCards.querySelector('.popup__input_type_text');
 export const inputSoursePopUpCards = formPopUpCards.querySelector('.popup__input_type_sourse');
 
+//попап аватар
+export const buttonAvatar = document.querySelector('.profile__avatar-button');
+export const formPopUpAvatar = document.querySelector('.popup__form_type_three')
+
 //секция карточек
 export const elements = [
     {

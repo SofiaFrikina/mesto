@@ -1,10 +1,11 @@
 export class Card {
-    constructor(name, link, handleClickByImage, likeCard, removeCard) {
+    constructor(name, link, handleClickByImage, likeCard, removeCard, _id) {
         this._name = name;
         this._link = link;
         this._handleClickByImage = handleClickByImage;
         this._likeCard = likeCard;
         this._removeCard = removeCard;
+        this.id = _id;
 
     }
     //получает шаблон создаваемой карточки

@@ -5,6 +5,10 @@
     margin-right: 30px;
 }
 
+.profile__avatar-container:hover .profile__avatar{
+    opacity: .2;
+}
+
 @media screen and (max-width: 1110px) {
     .profile__avatar {
         margin-right: 0;
