@@ -92,32 +92,39 @@ popupUser.setEventListeners();
 
 const popupImage = new PopupWithImage('.popup_type_image');
 
-function handleClickByImage(name, link) {
-    popupImage.open(name, link);
-}
+
 
 popupImage.setEventListeners();
 //публикация карточек
 const createCard = (data, currentId) => {
-    const card = new Card(data, handleClickByImage, removeCard, putLike, removeLike, currentId);
+    const card = new Card({
+        data: data,
+        handleClickByImage: (name, link) => {
+            popupImage.open(name, link);
+        },
+        removeCard: (id, element) => {
+            popupConfirm.open(id, element);
+        },
+        putLike: (id) => {
+            api.likeCard(id)
+                .then((res) => {
+                    card.amountLike(res);
+                })
+                .catch((err) => console.log(err))
+        },
+        removeLike: (id) => {
+            api.deleteLike(id)
+                .then((res) => {
+                    card.amountLike(res);
+                })
+                .catch((err) => console.log(err))
+        },
+        currentId: currentId
+    });
     return card.generateCard();
 };
 
-function putLike(id) {
-    api.likeCard(id)
-        .then((res) => {
-            card.amountLike(res);
-        })
-        .catch((err) => console.log(err))
-}
 
-function removeLike(id) {
-    api.deleteLike(id)
-        .then((res) => {
-            card.amountLike(res);
-        })
-        .catch((err) => console.log(err))
-}
 
 
 
@@ -143,13 +150,6 @@ const popupConfirm = new PopupWIthConfirmation('.popup_type_confirm', {
 popupConfirm.setEventListeners();
 
 
-function removeCard(id, element) {
-    //card.clickRemoveCard();
-    popupConfirm.open(id, element);
-
-
-
-}
 
 const cards = new Section({
     items: [],

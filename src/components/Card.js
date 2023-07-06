@@ -1,16 +1,15 @@
 export class Card {
-    constructor(data, handleClickByImage, removeCard, putLike, removeLike, currentId) {
+    constructor({ data, handleClickByImage, removeCard, putLike, removeLike, currentId }) {
         this._name = data.name;
         this._link = data.link;
-        this._handleClickByImage = handleClickByImage;
-        //this._likeCard = likeCard;
-        this._removeCard = removeCard;
         this.id = data._id;
-        this._currentId = currentId;
         this._dataLikes = data.likes;
+        this.cardData = data;
+        this._handleClickByImage = handleClickByImage;
+        this._removeCard = removeCard;
         this._putLike = putLike;
         this._removeLike = removeLike;
-        this.cardData = data;
+        this._currentId = currentId;
 
     }
     //получает шаблон создаваемой карточки
@@ -30,13 +29,14 @@ export class Card {
         this._cardImage.alt = this._name;
         this.amountLike(this.cardData)
         this._setEventListeners();
-
+        //console.log(this.id)
+        //console.log(this.cardData)
         return this.element;
     }
 
     //функция проверки наличия лайка
     presenceLike() {
-
+        //return this._dataLikes.map((userInfo) => userInfo._id).includes(this._currentId);
         return this._dataLikes.some(like => like._id === this._currentId)
     }
 
@@ -45,6 +45,7 @@ export class Card {
             this._removeLike(this.id);
         } else {
             this._putLike(this.id)
+
         }
         //this._likeButton.classList.toggle('element_clicked');
     }
