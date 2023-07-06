@@ -8,17 +8,18 @@ export class UserInfo {
     getUserInfo() {
         return {
             name: this._profileName.textContent,
-            job: this._profileJob.textContent
+            about: this._profileJob.textContent,
+
         }
 
     }
     //принимает новые данные пользователя и добавляет их на страницу
-    setUserInfo(name, job) {
+    setUserInfo({ name, about }) {
         this._profileName.textContent = name;
-        this._profileJob.textContent = job;
+        this._profileJob.textContent = about;
     }
 
-    setUserAvatar(link) {
-        this._profileAvatar.src = link;
+    setUserAvatar(url) {
+        this._profileAvatar.src = url.avatar;
     }
 }

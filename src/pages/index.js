@@ -13,25 +13,28 @@ const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-70',
     headers: {
         authorization: 'c6851ead-6953-413a-a6ee-14ef0893ecb7',
-        'Content-Type': "applycation/json"
+        'Content-Type': "application/json"
     }
 })
 
 Promise.all([api.getUserInfo(), api.getCards()])
     .then(([data, initialCards]) => {
         //useid = data._id;
-        userInfo.setUserAvatar(data.avatar)
-        userInfo.setUserInfo(data.name, data.about);
+        userInfo.setUserAvatar(data)
+        userInfo.setUserInfo(data);
         //cards.renderItems(initialCards, useid);
-        cards.renderItems(initialCards.reverse())
+        //cards.renderItems(initialCards.reverse())
+        initialCards.forEach((item => {
+            cards.addItem(createCard(item));
+        }));
     })
     .catch((err) => console.log(err))
 
 const popupAvatar = new PopupWithForm('.popup_type_avatar', {
-    handleFormSubmit: (cardData) => {
-        api.editAvatar(cardData.url)
+    handleFormSubmit: (data) => {
+        api.editAvatar(data)
             .then((data) => {
-                userInfo.setUserAvatar(data.link);
+                userInfo.setUserAvatar(data);
                 popupAvatar.close();
             })
             .catch((err) => console.log(err))
@@ -54,10 +57,10 @@ const userInfo = new UserInfo({
 
 //попап редактирования профиля
 const popupUser = new PopupWithForm('.popup', {
-    handleFormSubmit: (cardData) => {
-        api.editUserInfo(cardData.name, cardData.job)
-            .then((data) => {
-                userInfo.setUserInfo(data.name, data.job);
+    handleFormSubmit: (data) => {
+        api.editUserInfo(data)
+            .then((res) => {
+                userInfo.setUserInfo(res);
                 popupUser.close();
             })
             .catch((err) => console.log(err))
@@ -67,11 +70,12 @@ const popupUser = new PopupWithForm('.popup', {
 
 editButton.addEventListener('click', function (e) {
     e.preventDefault();
-    const data = userInfo.getUserInfo();
-    inputNamePopUpProfile.value = data.name;
-    inputJobPopUpProfile.value = data.job;
+    //const data = userInfo.getUserInfo();
+    //inputNamePopUpProfile.value = data.name;
+    //inputJobPopUpProfile.value = data.about;
     formvalidatoringProfile.disableButton();
     popupUser.open();
+    popupUser.setInputValues(userInfo.getUserInfo())
 });
 
 /*function profileFormSubmit(data) {
@@ -94,14 +98,28 @@ function handleClickByImage(name, link) {
 
 popupImage.setEventListeners();
 //публикация карточек
-const createCard = (item) => {
-    const card = new Card(item.name, item.link, handleClickByImage, likeCard, removeCard, item._id);
+const createCard = (data, currentId) => {
+    const card = new Card(data, handleClickByImage, removeCard, putLike, removeLike, currentId);
     return card.generateCard();
 };
 
-function likeCard(card) {
-    card.addLike();
+function putLike(id) {
+    api.likeCard(id)
+        .then((res) => {
+            card.amountLike(res);
+        })
+        .catch((err) => console.log(err))
 }
+
+function removeLike(id) {
+    api.deleteLike(id)
+        .then((res) => {
+            card.amountLike(res);
+        })
+        .catch((err) => console.log(err))
+}
+
+
 
 /*const popupUser = new PopupWithForm('.popup', {
     handleFormSubmit: (data) => {
@@ -110,32 +128,31 @@ function likeCard(card) {
     }
 });*/
 
-const popupConfirm = new PopupWIthConfirmation('.popup_type_confirm', handleFormSubmit);
+const popupConfirm = new PopupWIthConfirmation('.popup_type_confirm', {
+    handleFormSubmit: (idremovecard, card) => {
+        api.deleteCard(idremovecard)
+            .then(() => {
+                card.clickRemoveCard();
+                popupConfirm.close();
+            })
+            .catch((err) => console.log(err))
+    }
+});
 
 
 popupConfirm.setEventListeners();
 
-function handleFormSubmit(card) {
-    api.deleteCard(card._id)
-        .then(() => {
-            card.clickRemoveCard();
-            popupConfirm.close();
-        })
-        .catch((err) => console.log(err))
-}
 
-function removeCard(card) {
+function removeCard(id, element) {
     //card.clickRemoveCard();
-    popupConfirm.open();
-    popupConfirm.change(() => {
-        handleFormSubmit(card);
-    })
+    popupConfirm.open(id, element);
+
 
 
 }
 
 const cards = new Section({
-    items: elements,
+    items: [],
     renderer: (item) => {
         cards.addItem(createCard(item), 'append');
     }
@@ -144,10 +161,10 @@ const cards = new Section({
 cards.renderItems();
 
 const popupCard = new PopupWithForm('.popup_type_new-element', {
-    handleFormSubmit: (cardData) => {
-        api.addCards(cardData.name, cardData.link)
-            .then((data) => {
-                cards.addItem(createCard(data), 'prepend');
+    handleFormSubmit: (data) => {
+        api.addCards(data)
+            .then((res) => {
+                cards.addItem(createCard(res), 'prepend');
                 //formPopUpCards.reset();
                 //formvalidatoringCard.disableButton();
                 popupCard.close();

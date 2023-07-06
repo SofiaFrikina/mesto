@@ -4,7 +4,7 @@ export class Api {
     constructor(config) {
         this._url = config.url;
         this._headers = config.headers;
-        //this._authorization = config.headers['authorization'];
+        this._authorization = config.headers['authorization'];
     }
     _handleResponse = (res) => {
         if (res.ok) {
@@ -15,36 +15,40 @@ export class Api {
     };
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {
-            method: "GET",
-            headers: this._headers
+            headers: {
+                method: 'GET',
+                authorization: this._authorization
+            }
         })
             .then(this._handleResponse)
     };
     getCards() {
         return fetch(`${this._url}/cards`, {
-            method: "GET",
-            headers: this._headers
+            headers: {
+                method: 'GET',
+                authorization: this._authorization
+            }
         })
             .then(this._handleResponse)
     };
-    editUserInfo(name, about) {
+    editUserInfo(data) {
         return fetch(`${this._url}/users/me`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
-                name: `${name}`,
-                about: `${about}`
+                name: data.name,
+                about: data.about
             })
         })
             .then(this._handleResponse)
     };
-    addCards(name, link) {
+    addCards(data) {
         return fetch(`${this._url}/cards`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({
-                name: `${name}`,
-                link: `${link}`
+                name: data.name,
+                link: data.link
             })
         })
             .then(this._handleResponse)
@@ -53,9 +57,6 @@ export class Api {
         return fetch(`${this._url}/cards/${id}/likes`, {
             method: "PUT",
             headers: this._headers,
-            body: JSON.stringify({
-                _id: `${id}`
-            })
         })
             .then(this._handleResponse)
     };
@@ -63,9 +64,7 @@ export class Api {
         return fetch(`${this._url}/cards/${id}/likes`, {
             method: "DELETE",
             headers: this._headers,
-            body: JSON.stringify({
-                _id: `${id}`
-            })
+
         })
             .then(this._handleResponse)
     };
@@ -76,12 +75,12 @@ export class Api {
         })
             .then(this._handleResponse)
     };
-    editAvatar(url) {
+    editAvatar(data) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
-                avatar: `${url}`
+                avatar: data.avatar
             })
         })
             .then(this._handleResponse)
