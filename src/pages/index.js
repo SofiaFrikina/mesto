@@ -99,6 +99,8 @@ popupImage.setEventListeners();
 const createCard = (data, currentId) => {
     const card = new Card({
         data: data,
+        currentId: currentId,
+        templateSelector: '.elements-template',
         handleClickByImage: (name, link) => {
             popupImage.open(name, link);
         },
@@ -118,8 +120,7 @@ const createCard = (data, currentId) => {
                     card.amountLike(res);
                 })
                 .catch((err) => console.log(err))
-        },
-        currentId: currentId
+        }
     });
     return card.generateCard();
 };

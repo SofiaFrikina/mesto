@@ -1,15 +1,19 @@
 export class Card {
-    constructor({ data, handleClickByImage, removeCard, putLike, removeLike, currentId }) {
+    constructor({ data, currentId, templateSelector, handleClickByImage, removeCard, putLike, removeLike }) {
         this._name = data.name;
         this._link = data.link;
-        this.id = data._id;
-        this._dataLikes = data.likes;
-        this.cardData = data;
+        this._currentId = currentId;
+        this._templateSelector = templateSelector;
         this._handleClickByImage = handleClickByImage;
+        this._dataLikes = data.likes;
+        this.id = data._id;
+        this.cardData = data;
+        this._countLike = data.likes.length;
         this._removeCard = removeCard;
         this._putLike = putLike;
         this._removeLike = removeLike;
-        this._currentId = currentId;
+        this._ownerId = data.owner._id;
+
 
     }
     //получает шаблон создаваемой карточки
@@ -21,13 +25,19 @@ export class Card {
     //вставит данные в разметку и подготовит карточку к публикации
     generateCard() {
         this.element = this._getTemplate();
+        this._deleteCardButton = this.element.querySelector('.element__button-close');
         this._likeButton = this.element.querySelector('.element__button');
         this._countLike = this.element.querySelector('.element__count');//
         this.element.querySelector('.element__text').textContent = this._name;
         this._cardImage = this.element.querySelector('.element__image')
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
-        this.amountLike(this.cardData)
+        this.amountLike(this.cardData);
+        //console.log(this._ownerId, this._currentId);
+        if (this._ownerId !== this._currentId) {
+            this._deleteCardButton.remove();
+
+        }
         this._setEventListeners();
         //console.log(this.id)
         //console.log(this.cardData)
@@ -73,10 +83,10 @@ export class Card {
     _setEventListeners() {
 
         this._likeButton.addEventListener('click', () => {
-            this.addLike()
+            this.addLike();
         });
 
-        this._deleteCardButton = this.element.querySelector('.element__button-close');
+
         this._deleteCardButton.addEventListener('click', () => {
             this._removeCard(this, this.id);
         });
