@@ -12,6 +12,8 @@ export const inputJobPopUpProfile = formPopUpProfile.querySelector('.popup__inpu
 
 //попап добавления карточек
 //export const popUpNewCards = document.querySelector('.popup_type_new-element');
+export const name = document.querySelector('#text-input');
+export const link = document.querySelector('#url-input');
 export const formPopUpCards = document.querySelector('.popup__form_type_two');
 export const inputTextPopUpCards = formPopUpCards.querySelector('.popup__input_type_text');
 export const inputSoursePopUpCards = formPopUpCards.querySelector('.popup__input_type_sourse');

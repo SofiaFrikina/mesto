@@ -1,18 +1,18 @@
 export class Card {
-    constructor({ data, currentId, templateSelector, handleClickByImage, removeCard, putLike, removeLike }) {
-        this._name = data.name;
-        this._link = data.link;
-        this._currentId = currentId;
+    constructor({ card, user, templateSelector, handleClickByImage, removeCard, putLike, removeLike }) {
+        this._name = card.name;
+        this._link = card.link;
+        this._userId = user;
         this._templateSelector = templateSelector;
         this._handleClickByImage = handleClickByImage;
-        this._dataLikes = data.likes;
-        this.id = data._id;
-        this.cardData = data;
-        this._countLike = data.likes.length;
+        this._dataLikes = card.likes;
+        this.id = card._id;
+        this.cardData = card;
+        this._countLike = card.likes.length;
         this._removeCard = removeCard;
         this._putLike = putLike;
         this._removeLike = removeLike;
-        this._ownerId = data.owner._id;
+        this._ownerId = card.owner._id;
 
 
     }
@@ -34,7 +34,7 @@ export class Card {
         this._cardImage.alt = this._name;
         this.amountLike(this.cardData);
         //console.log(this._ownerId, this._currentId);
-        if (this._ownerId !== this._currentId) {
+        if (this._ownerId !== this._userId) {
             this._deleteCardButton.remove();
 
         }
@@ -47,7 +47,7 @@ export class Card {
     //функция проверки наличия лайка
     presenceLike() {
         //return this._dataLikes.map((userInfo) => userInfo._id).includes(this._currentId);
-        return this._dataLikes.some(like => like._id === this._currentId)
+        return this._dataLikes.some(like => like._id === this._userId)
     }
 
     addLike() {
