@@ -18,7 +18,7 @@ export class Card {
     }
     //получает шаблон создаваемой карточки
     _getTemplate() {
-        const cardElement = document.querySelector('.elements-template').content.querySelector('.element').cloneNode(true);
+        const cardElement = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
         return cardElement;
 
     }

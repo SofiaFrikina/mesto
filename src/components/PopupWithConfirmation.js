@@ -11,11 +11,11 @@ export class PopupWIthConfirmation extends Popup {
 
     open(element, id) {
         super.open();
-        this.idremovecard = id;
+        this.idRemoveCard = id;
         this.card = element;
     }
 
-    preloader(loading, displayText) {
+    showPreloader(loading, displayText) {
         if (!this._buttonConfirm) return;
         if (loading) {
             this.defaultText = this._buttonConfirm.textContent;
@@ -29,7 +29,7 @@ export class PopupWIthConfirmation extends Popup {
     setEventListeners() {
         super.setEventListeners();
         this._buttonConfirm.addEventListener('click', () => {
-            this._handleFormSubmit(this.idremovecard, this.card);
+            this._handleFormSubmit(this.idRemoveCard, this.card);
         });
     }
 

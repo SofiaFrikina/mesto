@@ -24,7 +24,7 @@ export class PopupWithForm extends Popup {
         });
     }
 
-    preloader(loading, displayText) {
+    showPreloader(loading, displayText) {
         if (!this._buttonSubmit) return;
         if (loading) {
             this.defaultText = this._buttonSubmit.textContent;
